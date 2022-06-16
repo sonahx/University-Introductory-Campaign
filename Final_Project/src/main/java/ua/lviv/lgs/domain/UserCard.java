@@ -2,7 +2,18 @@ package ua.lviv.lgs.domain;
 
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "userCard")
 public class UserCard {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+
 	private Integer id;
 	private Double avgSchoolScore;
 	private Double subjScore_1;

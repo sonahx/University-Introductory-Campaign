@@ -1,19 +1,45 @@
 package ua.lviv.lgs.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name ="user")
 public class User {
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Integer id;
 	private String email;
 	private String firstName;
 	private String lastName;
 	private String password;
+	private String passwordConfirm;
 	private UserRole role;
-	private List<Faculty> applications;
+	
+	@ManyToMany(mappedBy = "applicants")
+	private List<Faculty> applications = new ArrayList<Faculty>();
 
 	public User() {
 	};
+	
+	public User(User user) {
+		this.id = user.id;
+		this.email = user.email;
+		this.firstName = user.firstName;
+		this.lastName = user.lastName;
+		this.password = user.password;
+		this.role = user.role;
+		this.applications = user.applications;
+	};
+	
 
 	public User(Integer id, String email, String firstName, String lastName, String password, UserRole role,
 			List<Faculty> applications) {
@@ -97,6 +123,14 @@ public class User {
 
 	public void setApplications(List<Faculty> applications) {
 		this.applications = applications;
+	}
+	
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
 	}
 
 	@Override

@@ -1,14 +1,32 @@
 package ua.lviv.lgs.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name ="faculty")
 public class Faculty {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String name;
 	private String description;
 	private Double minimumScore;
-	private List<User> applicants;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "faculty_user", joinColumns = @JoinColumn(name = "faculty_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> applicants = new ArrayList<User>();
 
 	public Faculty() {
 	}
