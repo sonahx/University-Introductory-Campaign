@@ -1,6 +1,7 @@
 package ua.lviv.lgs.config;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -18,8 +19,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		registry.addViewController("/home").setViewName("home");
 		registry.addViewController("login").setViewName("login");
 		registry.addViewController("/403").setViewName("403");
+		registry.addViewController("/registration").setViewName("registration");
 	}
 	
+	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/jsp/");

@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 import ua.lviv.lgs.dao.UserRepository;
 import ua.lviv.lgs.domain.User;
+import ua.lviv.lgs.domain.UserRole;
 
 @Service
-public class UserSevice {
+public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -18,7 +19,8 @@ public class UserSevice {
 
 	public void save(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
+		user.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
+		user.setRole(UserRole.ROLE_USER);
 		userRepository.save(user);
 	}
 }

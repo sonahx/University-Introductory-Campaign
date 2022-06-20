@@ -22,7 +22,7 @@ public class WebSecurityConfig {
 	@Lazy
 	private UserDetailsService userDetailsService;
 
-	@Lazy
+
 	public void configAuthentification (AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
