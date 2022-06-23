@@ -23,6 +23,7 @@ public class Faculty {
 	private String name;
 	private String description;
 	private Double minimumScore;
+	private Integer studentQuantity;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "faculty_user", joinColumns = @JoinColumn(name = "faculty_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -31,19 +32,21 @@ public class Faculty {
 	public Faculty() {
 	}
 
-	public Faculty(Integer id, String name, String description, Double minimumScore, List<User> applicants) {
+	public Faculty(Integer id, String name, String description, Double minimumScore, List<User> applicants, Integer studentQuantity) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.minimumScore = minimumScore;
 		this.applicants = applicants;
+		this.studentQuantity = studentQuantity;
 	}
 
-	public Faculty(String name, String description, Double minimumScore, List<User> applicants) {
+	public Faculty(String name, String description, Double minimumScore, List<User> applicants,Integer studentQuantity) {
 		this.name = name;
 		this.description = description;
 		this.minimumScore = minimumScore;
 		this.applicants = applicants;
+		this.studentQuantity = studentQuantity;
 	}
 
 	public Integer getId() {
@@ -84,6 +87,14 @@ public class Faculty {
 
 	public void setApplicants(List<User> applicants) {
 		this.applicants = applicants;
+	}
+	
+	public Integer getStudentQuantity() {
+		return studentQuantity;
+	}
+
+	public void setStudentQuantity(Integer studentQuantity) {
+		this.studentQuantity = studentQuantity;
 	}
 
 	@Override

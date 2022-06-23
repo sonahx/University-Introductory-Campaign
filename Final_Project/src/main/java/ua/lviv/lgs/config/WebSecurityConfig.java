@@ -31,8 +31,14 @@ public class WebSecurityConfig {
 	protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/home").access("hasRole('ROLE_USER')")
-				.anyRequest().permitAll().and()
+		.antMatchers("/home").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+		.antMatchers("/profile").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+		.antMatchers("/profile/").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+		.antMatchers("/profile/{email}").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+		.antMatchers("/createFaculty").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+		
+		.anyRequest().permitAll().and()
+				
 				.formLogin().loginPage("/login").defaultSuccessUrl("/home")
 				.usernameParameter("email")
 				.passwordParameter("password").and().logout().logoutSuccessUrl("/login?logout").and()

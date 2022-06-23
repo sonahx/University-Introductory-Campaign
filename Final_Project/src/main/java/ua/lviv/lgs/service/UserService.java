@@ -1,5 +1,7 @@
 package ua.lviv.lgs.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import ua.lviv.lgs.domain.UserRole;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -22,5 +24,13 @@ public class UserService {
 		user.setPasswordConfirm(bCryptPasswordEncoder.encode(user.getPasswordConfirm()));
 		user.setRole(UserRole.ROLE_USER);
 		userRepository.save(user);
+	}
+
+	public User findOne(Integer id) {
+		return userRepository.getReferenceById(id);
+	}
+
+	public Optional<User> findByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 }
