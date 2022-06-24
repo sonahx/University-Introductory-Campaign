@@ -1,0 +1,103 @@
+@mixin media() {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+body, html {
+  font-family: 'Vollkorn', serif;
+  font-weight: 400;
+  line-height: 1.3;
+  font-size: 16px;
+}
+
+.siteTitle {
+  display: block;
+  font-weight: 900;
+  font-size: 30px;
+  margin: 20px 0;
+  
+  @include media {
+    font-size: 60px;
+  }
+}
+
+header,
+main,
+footer {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.card {
+  min-height: 700px;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  border: 4px solid #b0215e;
+  margin-bottom: 20px;
+  background-image: url('https://wallpaperaccess.com/full/1883847.jpg');
+    background-size: cover;
+  
+  @include media {
+    height: 500px;
+  }
+}
+
+.inner {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  background: white;
+  box-sizing: border-box;
+  padding: 40px;
+  
+  @include media {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+.title {
+  font-size: 24px;
+  color: black;  
+  text-align: center;
+  font-weight: 700;
+  color: #181818;
+  text-shadow: 0px 2px 2px #a6f8d5;
+  position: relative;
+  margin: 0 0 20px 0;
+  
+  @include media {
+    font-size: 30px;
+  }
+}
+
+.subtitle {
+  color: #b0215e;
+  text-align: center;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.footerLink {
+  margin-right: 12px;
+  color: #181818;
+  text-decoration: none;
+  position: relative;
+}
+.apply-button{
+	margin: 0 auto;
+	margin-top: 150px;
+	width: 250px;
+	height: 50px;
+}

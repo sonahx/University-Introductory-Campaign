@@ -69,10 +69,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/profile/{email}", method = RequestMethod.GET)
-	public String getProfileInfo(@PathVariable String email, HttpServletRequest req) {
+	public ModelAndView getProfileInfo(@PathVariable String email, HttpServletRequest req) {
 	Optional<User> user = userService.findByEmail(email);
 		req.setAttribute("user", user.get());
-		return "profile";
+		
+		ModelAndView map = new ModelAndView("profile");
+		map.addObject("applications", user.get().getApplications());
+		return map;
 	}
 
 }

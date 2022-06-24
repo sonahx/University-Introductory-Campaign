@@ -10,9 +10,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Registration</title>
 </head>
-<body>
+<body style="background-color: #eee;"> 
 
 <div class="container">
 

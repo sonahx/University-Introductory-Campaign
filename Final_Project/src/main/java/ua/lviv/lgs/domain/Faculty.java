@@ -11,42 +11,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="faculty")
+@Table(name = "faculty")
 public class Faculty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String name;
+	private String universityName;
+	
+	@Lob
 	private String description;
-	private Double minimumScore;
 	private Integer studentQuantity;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "faculty_user", joinColumns = @JoinColumn(name = "faculty_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List<User> applicants = new ArrayList<User>();
+	public List<User> applicants = new ArrayList<User>();
 
 	public Faculty() {
 	}
 
-	public Faculty(Integer id, String name, String description, Double minimumScore, List<User> applicants, Integer studentQuantity) {
+	public Faculty(Integer id, String name, String universityName, String description, Integer studentQuantity,
+			List<User> applicants) {
 		this.id = id;
 		this.name = name;
+		this.universityName = universityName;
 		this.description = description;
-		this.minimumScore = minimumScore;
-		this.applicants = applicants;
 		this.studentQuantity = studentQuantity;
+		this.applicants = applicants;
 	}
 
-	public Faculty(String name, String description, Double minimumScore, List<User> applicants,Integer studentQuantity) {
+	public Faculty(String name, String universityName, String description, Integer studentQuantity,
+			List<User> applicants) {
 		this.name = name;
+		this.universityName = universityName;
 		this.description = description;
-		this.minimumScore = minimumScore;
-		this.applicants = applicants;
 		this.studentQuantity = studentQuantity;
+		this.applicants = applicants;
 	}
 
 	public Integer getId() {
@@ -73,14 +78,6 @@ public class Faculty {
 		this.description = description;
 	}
 
-	public Double getMinimumScore() {
-		return minimumScore;
-	}
-
-	public void setMinimumScore(Double minimumScore) {
-		this.minimumScore = minimumScore;
-	}
-
 	public List<User> getApplicants() {
 		return applicants;
 	}
@@ -88,7 +85,7 @@ public class Faculty {
 	public void setApplicants(List<User> applicants) {
 		this.applicants = applicants;
 	}
-	
+
 	public Integer getStudentQuantity() {
 		return studentQuantity;
 	}
@@ -96,10 +93,19 @@ public class Faculty {
 	public void setStudentQuantity(Integer studentQuantity) {
 		this.studentQuantity = studentQuantity;
 	}
+	
+
+	public String getUniversityName() {
+		return universityName;
+	}
+
+	public void setUniversityName(String universityName) {
+		this.universityName = universityName;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(applicants, description, id, minimumScore, name);
+		return Objects.hash(universityName, description, id, name, studentQuantity);
 	}
 
 	@Override
@@ -111,15 +117,15 @@ public class Faculty {
 		if (getClass() != obj.getClass())
 			return false;
 		Faculty other = (Faculty) obj;
-		return Objects.equals(applicants, other.applicants) && Objects.equals(description, other.description)
-				&& Objects.equals(id, other.id) && Objects.equals(minimumScore, other.minimumScore)
-				&& Objects.equals(name, other.name);
+		return Objects.equals(universityName, other.universityName) && Objects.equals(description, other.description)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(studentQuantity, other.studentQuantity);
 	}
 
 	@Override
 	public String toString() {
-		return "Faculty [id=" + id + ", name=" + name + ", description=" + description + ", minimumScore="
-				+ minimumScore + ", applicants=" + applicants + "]";
+		return "Faculty [id=" + id + ", name=" + name + ", UniversityName=" + universityName + ", description="
+				+ description + ", studentQuantity=" + studentQuantity + "]";
 	}
 
 }

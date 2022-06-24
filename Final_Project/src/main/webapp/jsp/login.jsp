@@ -12,7 +12,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 </head>
-<body>
+<body style="background-color: #eee;">
 
 <div class="container">
 

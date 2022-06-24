@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>My profile</title>
+<title>${user.firstName} ${user.lastName}`s profile</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/profile.css">
@@ -35,8 +35,6 @@
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
             <h5 class="my-3">${user.firstName} ${user.lastName}</h5>
-<!--             <p class="text-muted mb-1">Full Stack Developer</p>
-            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> -->
             <div class="d-flex justify-content-center mb-2">
               <button type="button" class="btn btn-primary">Edit Profile</button>
 
@@ -84,7 +82,7 @@
           <div class="col-md-6">
             <div class="card mb-4 mb-md-0">
               <div class="card-body">
-                <p class="mb-4"><span class="text-primary font-italic me-1"></span> My Scores </p>
+                <p class="mb-4"><span class="text-primary font-italic me-1"></span> Exam Scores </p>
               </div>
             </div>
           </div>
@@ -92,6 +90,28 @@
             <div class="card mb-4 mb-md-0">
               <div class="card-body">
                 <p class="mb-4"><span class="text-primary font-italic me-1"></span> My Applications</p>
+                
+                  <table class="table">	
+  				<thead>
+						<tr>
+							<th>Faculty</th>
+							<th>University</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:if test="${not empty applications}">
+						<c:forEach items="${applications}" var="application">
+						
+						
+							<tr>
+							<td>${application.name}</td>		
+							<td>${application.universityName}</td>
+					<tr>
+				</c:forEach>
+						</c:if> 
+					</tbody>
+				</table>
+                
                 
               </div>
             </div>
@@ -106,6 +126,5 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="/js/profile.js"></script> 
 </body>
 </html>

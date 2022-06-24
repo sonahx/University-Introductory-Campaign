@@ -17,14 +17,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="/css/header.css">
         
-    <%-- <c:set var="contextPath" value="${pageContext.request.contextPath}"/> --%>
 </head>
 <body>
  <div>
         <div class="header-dark main-wrapper">
             <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
 				<div class="container">
-					<a class="navbar-brand" href="${contextPath}/home">Company Name</a>
+					<a class="navbar-brand" href="${contextPath}/home">Introductory Campaign</a>
 					<button class="navbar-toggler" data-toggle="collapse"
 						data-target="#navcol-1">
 						<span class="sr-only">Toggle navigation</span><span
@@ -35,7 +34,7 @@
 							<li class="nav-item" role="presentation"><a class="nav-link"
 								href="${contextPath}/home">Home</a></li>
 								<li class="nav-item" role="presentation"><a class="nav-link"
-								<%-- href="${contextPath}/profile/${pageContext.request.userPrincipal.name}">Profile</a></li> --%>
+
 							href="${contextPath}/profile/${pageContext.request.userPrincipal.name}">Profile</a></li>
 							<li class="dropdown"><a
 								class="dropdown-toggle nav-link dropdown-toggle"

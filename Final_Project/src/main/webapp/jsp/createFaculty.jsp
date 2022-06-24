@@ -21,34 +21,20 @@
 
 
 
-<body>
+<body style="background-color: #eee;">
 <jsp:include page="header.jsp"></jsp:include>
 
-<form:form method="POST" action="${contextPath}/addFaculty" modelAttribute="faculty">
-					<table>
-						<tr>
-							<td><form:label path="name">Faculty name</form:label></td>
-							<td><form:input path="name" /></td>
-						</tr>
-						<tr>
-							<td><form:label path="description">Description</form:label></td>
-							<td><form:input path="description" /></td>
-						</tr>
-						<tr>
-							<td><form:label path="minimumScore">Minimum Score</form:label></td>
-							<td><form:input type="number" path="minimumScore" /></td>
-						</tr>
-						<tr>
-							<td><form:label path="studentQuantity">Number of students</form:label></td>
-							<td><form:input type="number" path="studentQuantity" /></td>
-						</tr>
-						<tr>
-							<td><input type="submit" value="Submit" /></td>
-						</tr>
-					</table>
-					<input type="hidden" name="${_csrf.parameterName}"
+<form:form method="POST" action="${contextPath}/addFaculty" modelAttribute="faculty">  
+    
+  <form:input name="name" path="name" type="text" class="feedback-input" placeholder="Faculty Name" />   
+  <form:input name="universityName" path="universityName" type="text" class="feedback-input" placeholder="University Name" />
+  <form:textarea name="text" path="description" class="feedback-input" placeholder="Description"></form:textarea>
+   <form:input name="studentQuantity" path="studentQuantity" type="number" class="feedback-input" placeholder="Active students number" />
+  <input type="submit" value="Submit"/>
+  
+  <input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-	
+  
 </form:form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
