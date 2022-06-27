@@ -7,39 +7,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+
 @Entity
 @Table
 public class Subject {
 	@Id
-	@GeneratedValue(strategy =GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	@Column
 	private String name;
 	@Column
 	private Double value;
 
-	/*
-	 * @ManyToMany(cascade = CascadeType.ALL)
-	 * 
-	 * @JoinTable(name = "subject_user", joinColumns = @JoinColumn(name =
-	 * "subject_id"), inverseJoinColumns = @JoinColumn(name = "user_id")) private
-	 * List<User> applicants = new ArrayList<User>();
-	 */
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+
 	public Subject() {
 	}
 
-	public Subject(Integer id, String name, Double value) {
+	public Subject(Integer id, String name, Double value, User user) {
 		this.id = id;
 		this.name = name;
 		this.value = value;
+		this.user = user;
 	}
 
-	public Subject(String name, Double value) {
+	public Subject(String name, Double value, User user) {
 		this.name = name;
 		this.value = value;
+		this.user = user;
 	}
 
 	public Integer getId() {
@@ -66,9 +67,17 @@ public class Subject {
 		this.value = value;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, value);
+		return Objects.hash(id, name, user, value);
 	}
 
 	@Override
@@ -80,12 +89,13 @@ public class Subject {
 		if (getClass() != obj.getClass())
 			return false;
 		Subject other = (Subject) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(value, other.value);
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(user, other.user)
+				&& Objects.equals(value, other.value);
 	}
 
 	@Override
 	public String toString() {
-		return "Subject [id=" + id + ", name=" + name + ", value=" + value + "]";
+		return "Subject [id=" + id + ", name=" + name + ", value=" + value + ", user=" + user + "]";
 	}
 
 }

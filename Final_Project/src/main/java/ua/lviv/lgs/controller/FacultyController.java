@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +28,7 @@ public class FacultyController {
 	private FacultyService facultyService;
 	
 	@RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
-	public ModelAndView createFaculty(@ModelAttribute("faculty") Faculty faculty,
-			BindingResult bindingResult) {
+	public ModelAndView createFaculty(@ModelAttribute("faculty") Faculty faculty) {
 		facultyService.save(faculty);
 		return new ModelAndView("redirect:/home");
 	}
@@ -48,7 +46,6 @@ public class FacultyController {
 	public ModelAndView apply(@PathVariable String email,@PathVariable Integer id, HttpServletRequest req) {
 		Optional<User> user = userService.findByEmail(email);
 		Faculty faculty = facultyService.findOne(id);
-		req.setAttribute("faculty", faculty);
 		
 		List<User> userList =faculty.getApplicants();
 		userList.add(user.get());
@@ -58,12 +55,8 @@ public class FacultyController {
 		List<Faculty> facultyList = user.get().getApplications();
 		facultyList.add(faculty);
 		user.get().setApplications(facultyList);
-		
-		
-		ModelAndView map = new ModelAndView("faculty");
-		map.addObject("applicants", faculty.getApplicants());
-		
-		return map;
+			
+		return new ModelAndView("redirect:/faculty/"+id.toString());
 	}
 	
 	

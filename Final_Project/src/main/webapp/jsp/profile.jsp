@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -36,7 +37,7 @@
               class="rounded-circle img-fluid" style="width: 150px;">
             <h5 class="my-3">${user.firstName} ${user.lastName}</h5>
             <div class="d-flex justify-content-center mb-2">
-              <button type="button" class="btn btn-primary">Edit Profile</button>
+              <!-- <button type="button" class="btn btn-primary">Edit Profile</button> -->
 
             </div>
           </div>
@@ -66,23 +67,132 @@
               </div>
             </div>
             <hr>
-            <div class="row">
-              <div class="col-sm-3">
+            <div class="row certificateScore">
+                    
+                    <div class="col-sm-3">
                 <p class="mb-0">Certificate score</p>
               </div>
+              <div class="col-sm-9 CertificateScoreText">
+                <p class="text-muted mb-0 ">${user.avgSchoolScore}</p>
+              </div>              
+            </div>
+            
+                        <!--START CERTIFICATE MODAL  --> 
+             
+<button type="button" class="btn btn-primary certificateScoreButton" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add certificate score</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New certificate score</h5>
+      </div>
+      <div class="modal-body">
+     
+        <form:form method="POST" action="${contextPath}/profile/${pageContext.request.userPrincipal.name}/addCertificateScore">
+          <div class="form-group">
+            <label for="score" class="col-form-label">Score:</label>
+            <input name="score" type="number" step=".01" min="50" max="200" class="form-control">
+            
+             <input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary">
+        </div>
+        </form:form >
+      </div>
+      
+    </div>
+  </div>
+</div>           
+     <!--END CERTIFICATE MODAL  -->    
+    <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Average score</p>
+              </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">${user.avgSchoolScore}</p>
+                <p class="text-muted mb-0">${user.averageScore}</p>
               </div>
             </div>
-
-
+            <hr> 
+     
+           
           </div>
+ 
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="card mb-4 mb-md-0">
               <div class="card-body">
                 <p class="mb-4"><span class="text-primary font-italic me-1"></span> Exam Scores </p>
+                <div>
+                       <table class="table">	
+  				<thead>
+						<tr>
+							<th>Subject</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tbody>
+					<c:if test="${not empty subjects}">
+						<c:forEach items="${subjects}" var="subject">				
+							<tr>
+							<td>${subject.name}</td>		
+							<td>${subject.value}</td>
+					<tr>
+				</c:forEach>
+						</c:if> 
+					</tbody>
+				</table>       
+                </div>
+                
+                 <!--START EXAM SCORE MODAL  --> 
+                
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Add exam score</button>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">New exam score</h5>
+      </div>
+      <div class="modal-body">
+     
+        <form:form method="POST" action="${contextPath}/profile/${pageContext.request.userPrincipal.name}/addSubject">
+          <div class="form-group">
+            <label for="name" class="col-form-label">Subject:</label>
+      <input list="subjects" name="name" class="form-control"/>
+<datalist id="subjects">
+  <option value="Math">
+  <option value="Native language">
+  <option value="Foreign language">
+  <option value="History">
+  <option value="Physics">
+  <option value="Biology">
+  <option value="Chemistry">
+  <option value="Geographics">
+</datalist>
+          </div>
+          <div class="form-group">
+            <label for="value" class="col-form-label">Score:</label>
+            <input name="value" type="number" step=".01" min="100" max="200" class="form-control">
+            
+             <input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary">
+        </div>
+        </form:form >
+      </div>
+      
+    </div>
+  </div>
+</div>            
+     <!--END EXAM SCORE MODAL  --> 
+                
               </div>
             </div>
           </div>
@@ -101,8 +211,7 @@
 					<tbody>
 					<c:if test="${not empty applications}">
 						<c:forEach items="${applications}" var="application">
-						
-						
+			
 							<tr>
 							<td>${application.name}</td>		
 							<td>${application.universityName}</td>
@@ -110,8 +219,7 @@
 				</c:forEach>
 						</c:if> 
 					</tbody>
-				</table>
-                
+				</table>           
                 
               </div>
             </div>

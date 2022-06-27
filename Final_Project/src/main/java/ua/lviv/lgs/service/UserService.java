@@ -33,4 +33,17 @@ public class UserService {
 	public Optional<User> findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
+	
+	public void update(User user) {
+		userRepository.save(user);
+	}
+	
+	public Double calculateScore(User user) {
+		Double subjectSum =user.getSubjects().stream().mapToDouble(s -> s.getValue()).sum();
+		Double schoolScore = user.getAvgSchoolScore();
+		
+		Double score = subjectSum + schoolScore;
+		int size = user.getSubjects().size()+1;
+		return score / size;
+	}
 }

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,15 +24,19 @@ public class User {
 	private String lastName;
 	private String password;
 	private String passwordConfirm;
+	
+	@Column(columnDefinition="Decimal(10,2)")
+	private Double averageScore;
+	
 	private Double avgSchoolScore;
-
-	@ManyToMany
-	private List<Subject> subjects = new ArrayList<>();
 
 	private UserRole role;
 
 	@ManyToMany(mappedBy = "applicants")
 	private List<Faculty> applications = new ArrayList<Faculty>();
+
+	@OneToMany(mappedBy = "user")
+	private List<Subject> subjects = new ArrayList<Subject>();
 
 	public User() {
 	};
@@ -145,9 +151,26 @@ public class User {
 		this.avgSchoolScore = avgSchoolScore;
 	}
 
+	public List<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
+
+	public Double getAverageScore() {
+		return averageScore;
+	}
+
+	public void setAverageScore(Double averageScore) {
+		this.averageScore = averageScore;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(avgSchoolScore, email, firstName, id, lastName, password, passwordConfirm, role);
+		return Objects.hash(averageScore, avgSchoolScore, email, firstName, id, lastName, password, passwordConfirm,
+				role);
 	}
 
 	@Override
@@ -159,17 +182,18 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(avgSchoolScore, other.avgSchoolScore) && Objects.equals(email, other.email)
-				&& Objects.equals(firstName, other.firstName) && Objects.equals(id, other.id)
-				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
-				&& Objects.equals(passwordConfirm, other.passwordConfirm) && role == other.role;
+		return Objects.equals(averageScore, other.averageScore) && Objects.equals(avgSchoolScore, other.avgSchoolScore)
+				&& Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(id, other.id) && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(password, other.password) && Objects.equals(passwordConfirm, other.passwordConfirm)
+				&& role == other.role;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", avgSchoolScore="
-				+ avgSchoolScore + ", role=" + role + "]";
+				+ ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", averageScore=" + averageScore
+				+ ", avgSchoolScore=" + avgSchoolScore + ", role=" + role + "]";
 	}
 
 }

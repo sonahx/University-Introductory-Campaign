@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ua.lviv.lgs.domain.Faculty;
+import ua.lviv.lgs.domain.Subject;
 import ua.lviv.lgs.domain.User;
 import ua.lviv.lgs.service.FacultyService;
+import ua.lviv.lgs.service.SubjectService;
 import ua.lviv.lgs.service.UserService;
 
 @Controller
@@ -27,6 +30,9 @@ public class UserController {
 
 	@Autowired
 	private FacultyService facultyService;
+	
+	@Autowired
+	private SubjectService subjectService;
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
@@ -66,16 +72,49 @@ public class UserController {
 	@RequestMapping(value = "/createFaculty", method = RequestMethod.GET)
 	public ModelAndView createFaculty() {
 		return new ModelAndView("createFaculty", "faculty", new Faculty());
-	}
+	}	
 	
-	@RequestMapping(value = "/profile/{email}", method = RequestMethod.GET)
+	@RequestMapping(value = "/profile/{email}", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView getProfileInfo(@PathVariable String email, HttpServletRequest req) {
 	Optional<User> user = userService.findByEmail(email);
 		req.setAttribute("user", user.get());
 		
 		ModelAndView map = new ModelAndView("profile");
 		map.addObject("applications", user.get().getApplications());
+		map.addObject("subjects", user.get().getSubjects());
 		return map;
-	}
+	}	
+	
+	@RequestMapping(value = "/profile/{email}/addSubject", method =  RequestMethod.POST)
+	public ModelAndView addSubject(@PathVariable String email, @RequestParam String name, 
+			@RequestParam Double value) {
 
+		Optional<User> user = userService.findByEmail(email);
+		
+		Subject subject = new Subject();
+		subject.setName(name);
+		subject.setValue(value);
+		subject.setUser(user.get());
+		subjectService.save(subject);
+		
+		Double averageScore = userService.calculateScore(user.get());
+		user.get().setAverageScore(averageScore);
+        userService.update(user.get());
+
+		return new ModelAndView("redirect:/profile/"+email);
+	}
+	
+	@RequestMapping(value = "/profile/{email}/addCertificateScore", method =  RequestMethod.POST)
+	public ModelAndView addCertificateScore(@PathVariable String email, @RequestParam Double score) {
+		Optional<User> user = userService.findByEmail(email);
+		user.get().setAvgSchoolScore(score);
+		
+		Double averageScore = userService.calculateScore(user.get());
+		user.get().setAverageScore(averageScore);
+		
+        userService.update(user.get());
+		return new ModelAndView("redirect:/profile/"+email);
+	}
+	
+	
 }

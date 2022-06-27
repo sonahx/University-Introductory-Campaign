@@ -44,7 +44,7 @@
 						
 							<tr>
 							<td>${applicant.firstName} ${applicant.lastName}</td>		
-							<td>TO DO</td>
+							<td>${applicant.averageScore}</td>
 					<tr>
 				</c:forEach>
 						</c:if> 
