@@ -16,10 +16,10 @@
 
 <div class="container">
 
-    <form:form method="POST" modelAttribute="userForm" class="form-signin">
+   <form:form method="POST" modelAttribute="userForm" class="form-signin">
         <h2 class="form-signin-heading">Create your account</h2>
-        
-        <spring:bind path="firstName">
+
+			<spring:bind path="firstName">
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <form:input type="text" path="firstName" class="form-control" placeholder="First name"
                             autofocus="true"></form:input>
@@ -60,9 +60,9 @@
         </spring:bind>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-    </form:form>
-
-</div>
+    </form:form> 
+    
+</div> 
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

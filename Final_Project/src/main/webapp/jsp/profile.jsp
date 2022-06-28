@@ -33,11 +33,46 @@
       <div class="col-lg-4">
         <div class="card mb-4">
           <div class="card-body text-center">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+ 
+                  <c:if test="${user.encodedImage != null}">
+                         <img  src="data:image/jpeg;base64, ${user.encodedImage}" alt="avatar" 
+     class="rounded-circle img-fluid" style="width: 150px;">      
+                      </c:if>
+                      <c:if test="${user.encodedImage == null}">
+                        <img  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" 
+     class="rounded-circle img-fluid" style="width: 150px;">
+                      </c:if>
+      
             <h5 class="my-3">${user.firstName} ${user.lastName}</h5>
             <div class="d-flex justify-content-center mb-2">
-              <!-- <button type="button" class="btn btn-primary">Edit Profile</button> -->
+            
+ <!--START PHOTO MODAL  --> 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3" data-whatever="@mdo">Change photo</button>
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">New photo</h5>
+      </div>
+      <div class="modal-body">
+     
+        <form:form method="POST" action="${contextPath}/profile/${pageContext.request.userPrincipal.name}/addPhoto" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="encodedImage" class="col-form-label">Upload photo:</label>
+      <input type="file" name="encodedImage" class="form-control"/>
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary">
+        </div>
+        </form:form >
+      </div>
+      
+    </div>
+  </div>
+</div>            
+     <!--END PHOTO MODAL  --> 
+
 
             </div>
           </div>

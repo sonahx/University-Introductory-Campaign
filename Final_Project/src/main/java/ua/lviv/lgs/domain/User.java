@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,11 +25,14 @@ public class User {
 	private String lastName;
 	private String password;
 	private String passwordConfirm;
-	
-	@Column(columnDefinition="Decimal(10,2)")
+
+	@Column(columnDefinition = "Decimal(10,2)")
 	private Double averageScore;
-	
+
 	private Double avgSchoolScore;
+
+	@Lob
+	private String encodedImage;
 
 	private UserRole role;
 
@@ -70,13 +74,14 @@ public class User {
 		this.role = role;
 	}
 
-	public User(Integer id, String email, String firstName, String lastName, String password, UserRole role) {
-		this.id = id;
+	public User(String email, String firstName, String lastName, String password, String passwordConfirm,
+			String encodedImage) {
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
-		this.role = role;
+		this.passwordConfirm = passwordConfirm;
+		this.encodedImage = encodedImage;
 	}
 
 	public Integer getId() {
@@ -165,6 +170,14 @@ public class User {
 
 	public void setAverageScore(Double averageScore) {
 		this.averageScore = averageScore;
+	}
+
+	public String getEncodedImage() {
+		return encodedImage;
+	}
+
+	public void setEncodedImage(String encodedImage) {
+		this.encodedImage = encodedImage;
 	}
 
 	@Override
