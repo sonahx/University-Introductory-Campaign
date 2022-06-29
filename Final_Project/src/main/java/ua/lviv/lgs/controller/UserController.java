@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,9 +68,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public ModelAndView welcome() {
+	public ModelAndView welcome(HttpServletRequest req) {
 		ModelAndView map = new ModelAndView("home");
 		map.addObject("faculties", facultyService.getAllFaculties());
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userEmail = auth.getName();
+		Optional<User> user = userService.findByEmail(userEmail);
+		req.setAttribute("user", user.get());
 		return map;
 	}
 
@@ -99,7 +106,7 @@ public class UserController {
 		subject.setUser(user.get());
 		subjectService.save(subject);
 
-		Double averageScore = userService.calculateScore(user.get());
+		Double averageScore = UserDTO.calculateScore(user.get());
 		user.get().setAverageScore(averageScore);
 		userService.update(user.get());
 
@@ -111,7 +118,7 @@ public class UserController {
 		Optional<User> user = userService.findByEmail(email);
 		user.get().setAvgSchoolScore(score);
 
-		Double averageScore = userService.calculateScore(user.get());
+		Double averageScore = UserDTO.calculateScore(user.get());
 		user.get().setAverageScore(averageScore);
 
 		userService.update(user.get());

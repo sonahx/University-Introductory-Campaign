@@ -15,7 +15,7 @@
 <title>home</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+<link rel="stylesheet" href="/css/home.css"> 
 <body style="background-color: #eee;">
 
 <jsp:include page="header.jsp" />
@@ -26,7 +26,9 @@
 							<th>Faculty name</th>
 							<th>University</th>
 							<th>Students</th>
-
+							<th>Student spots</th>
+							<th></th>
+							<th></th>
 
 						</tr>
 					</thead>
@@ -37,9 +39,24 @@
 							<td>${currentFaculty.name}</td>	
 							<td>${currentFaculty.universityName}</td>
 							<td>${currentFaculty.studentQuantity}</td>
+							<td>${currentFaculty.studentsToAccept}</td>
 							
-					<td><a href="${contextPath}/faculty/${currentFaculty.id}">Read More</a></td>
-					<td><a href="${contextPath}/faculty/${currentFaculty.id}/apply/${pageContext.request.userPrincipal.name}">Apply</a></td> 
+					<td><a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}">More</a></td>
+					
+					
+  <c:set var="averageScore" value="${user.averageScore}" />
+<c:choose>
+    <c:when test="${averageScore ne null}"> 
+        <td><a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}/apply/${pageContext.request.userPrincipal.name}">Apply</a></td>
+    </c:when>
+    <c:otherwise>
+           
+<!-- Button trigger modal -->
+<td><button type="button" class="btn btn-primary apply-button" data-toggle="modal" data-target="#exampleModal">
+  Apply
+</button> </td>      
+    </c:otherwise> 
+</c:choose>	
 					<tr>
 				</c:forEach>
 						</c:if>
@@ -47,6 +64,23 @@
 				</table>
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+      </div>
+      <div class="modal-body">
+        You have to add your school certificate and exam scores to your profile first!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a type="button" href="${contextPath}/profile/${pageContext.request.userPrincipal.name}" class="btn btn-primary">Navigate to profile</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

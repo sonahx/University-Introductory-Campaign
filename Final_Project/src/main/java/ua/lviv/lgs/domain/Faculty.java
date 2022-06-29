@@ -23,7 +23,8 @@ public class Faculty {
 	private Integer id;
 	private String name;
 	private String universityName;
-	
+	private Integer studentsToAccept;
+
 	@Lob
 	private String description;
 	private Integer studentQuantity;
@@ -35,20 +36,22 @@ public class Faculty {
 	public Faculty() {
 	}
 
-	public Faculty(Integer id, String name, String universityName, String description, Integer studentQuantity,
-			List<User> applicants) {
+	public Faculty(Integer id, String name, String universityName, Integer studentsToAccept, String description,
+			Integer studentQuantity, List<User> applicants) {
 		this.id = id;
 		this.name = name;
 		this.universityName = universityName;
+		this.studentsToAccept = studentsToAccept;
 		this.description = description;
 		this.studentQuantity = studentQuantity;
 		this.applicants = applicants;
 	}
 
-	public Faculty(String name, String universityName, String description, Integer studentQuantity,
-			List<User> applicants) {
+	public Faculty(String name, String universityName, Integer studentsToAccept, String description,
+			Integer studentQuantity, List<User> applicants) {
 		this.name = name;
 		this.universityName = universityName;
+		this.studentsToAccept = studentsToAccept;
 		this.description = description;
 		this.studentQuantity = studentQuantity;
 		this.applicants = applicants;
@@ -93,7 +96,6 @@ public class Faculty {
 	public void setStudentQuantity(Integer studentQuantity) {
 		this.studentQuantity = studentQuantity;
 	}
-	
 
 	public String getUniversityName() {
 		return universityName;
@@ -103,9 +105,17 @@ public class Faculty {
 		this.universityName = universityName;
 	}
 
+	public Integer getStudentsToAccept() {
+		return studentsToAccept;
+	}
+
+	public void setStudentsToAccept(Integer studentsToAccept) {
+		this.studentsToAccept = studentsToAccept;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(universityName, description, id, name, studentQuantity);
+		return Objects.hash(description, id, name, studentQuantity, studentsToAccept, universityName);
 	}
 
 	@Override
@@ -117,15 +127,16 @@ public class Faculty {
 		if (getClass() != obj.getClass())
 			return false;
 		Faculty other = (Faculty) obj;
-		return Objects.equals(universityName, other.universityName) && Objects.equals(description, other.description)
-				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(studentQuantity, other.studentQuantity);
+		return Objects.equals(description, other.description) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name) && Objects.equals(studentQuantity, other.studentQuantity)
+				&& Objects.equals(studentsToAccept, other.studentsToAccept)
+				&& Objects.equals(universityName, other.universityName);
 	}
 
 	@Override
 	public String toString() {
-		return "Faculty [id=" + id + ", name=" + name + ", UniversityName=" + universityName + ", description="
-				+ description + ", studentQuantity=" + studentQuantity + "]";
+		return "Faculty [id=" + id + ", name=" + name + ", universityName=" + universityName + ", studentsToAccept="
+				+ studentsToAccept + ", description=" + description + ", studentQuantity=" + studentQuantity + "]";
 	}
 
 }

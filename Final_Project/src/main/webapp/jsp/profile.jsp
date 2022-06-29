@@ -184,8 +184,36 @@
                 </div>
                 
                  <!--START EXAM SCORE MODAL  --> 
-                
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Add exam score</button>
+       
+       
+     <c:choose>
+    <c:when test="${user.avgSchoolScore == null}"> 
+         
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4">
+  Add exam scores
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+      </div>
+      <div class="modal-body">
+        You have to add your school certificate first!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div> 
+         
+    </c:when>
+    <c:otherwise>		
+    	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Add exam score</button>
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -227,7 +255,9 @@
   </div>
 </div>            
      <!--END EXAM SCORE MODAL  --> 
-                
+      </c:otherwise> 
+</c:choose>	  
+            
               </div>
             </div>
           </div>

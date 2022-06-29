@@ -35,6 +35,8 @@ public class User {
 	private String encodedImage;
 
 	private UserRole role;
+	
+	private String status;
 
 	@ManyToMany(mappedBy = "applicants")
 	private List<Faculty> applications = new ArrayList<Faculty>();
@@ -179,11 +181,19 @@ public class User {
 	public void setEncodedImage(String encodedImage) {
 		this.encodedImage = encodedImage;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(averageScore, avgSchoolScore, email, firstName, id, lastName, password, passwordConfirm,
-				role);
+		return Objects.hash(averageScore, avgSchoolScore, email, encodedImage, firstName, id, lastName, password,
+				passwordConfirm, role, status);
 	}
 
 	@Override
@@ -196,10 +206,11 @@ public class User {
 			return false;
 		User other = (User) obj;
 		return Objects.equals(averageScore, other.averageScore) && Objects.equals(avgSchoolScore, other.avgSchoolScore)
-				&& Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(id, other.id) && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(password, other.password) && Objects.equals(passwordConfirm, other.passwordConfirm)
-				&& role == other.role;
+				&& Objects.equals(email, other.email) && Objects.equals(encodedImage, other.encodedImage)
+				&& Objects.equals(firstName, other.firstName) && Objects.equals(id, other.id)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
+				&& Objects.equals(passwordConfirm, other.passwordConfirm) && role == other.role
+				&& status == other.status;
 	}
 
 	@Override
