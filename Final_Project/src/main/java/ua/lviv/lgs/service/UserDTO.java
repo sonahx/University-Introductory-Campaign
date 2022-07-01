@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import ua.lviv.lgs.domain.Faculty;
 import ua.lviv.lgs.domain.User;
+import ua.lviv.lgs.domain.UserApplication;
 
 public class UserDTO {
 
@@ -26,17 +27,20 @@ public class UserDTO {
 		return score / size;
 	}
 	
-	public static List<User> setStatus(Faculty faculty, User user) {
+	public static List<UserApplication> setStatus(Faculty faculty, User user, UserApplication userApplication) {
 		
-		List<User> list= faculty.getApplicants().stream().sorted(Comparator.comparing(User::getAverageScore).reversed())
+		List<UserApplication> list= faculty.getApplicants().stream().sorted(Comparator.comparing(UserApplication::getUserScore).reversed())
 				.limit(faculty.getStudentsToAccept()).collect(Collectors.toList());
 			
-		if(list.contains(user)) {
-			user.setStatus("Accepted");
+		List<User> userList = list.stream().map(u -> u.getUser()).collect(Collectors.toList());
+			
+		if(userList.contains(user)) {
+			userApplication.setStatus("Accepted");
 		}else{
-			user.setStatus("Declined");
-		}	
-		List<User> applicants = faculty.getApplicants();
+			userApplication.setStatus("Declined");
+		}
+		
+		List<UserApplication> applicants = faculty.getApplicants();
 		applicants.forEach(u ->{	
 			if(!list.contains(u)) {
 				u.setStatus("Declined");		

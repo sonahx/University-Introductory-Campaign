@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ua.lviv.lgs.domain.Faculty;
 import ua.lviv.lgs.domain.User;
+import ua.lviv.lgs.domain.UserApplication;
 import ua.lviv.lgs.service.FacultyService;
+import ua.lviv.lgs.service.UserApplicationService;
 import ua.lviv.lgs.service.UserDTO;
 import ua.lviv.lgs.service.UserService;
 
@@ -29,6 +31,9 @@ public class FacultyController {
 
 	@Autowired
 	private FacultyService facultyService;
+	
+	@Autowired
+	UserApplicationService userApplicationService;
 
 	@RequestMapping(value = "/addFaculty", method = RequestMethod.POST)
 	public ModelAndView createFaculty(@ModelAttribute("faculty") Faculty faculty) {
@@ -57,18 +62,19 @@ public class FacultyController {
 		Optional<User> user = userService.findByEmail(email);
 		Faculty faculty = facultyService.findOne(id);
 
-
-		List<User> userList = faculty.getApplicants();
-		userList.add(user.get());
+		UserApplication userApplication	= new UserApplication(faculty,user.get());
+		userApplicationService.save(userApplication);
 		
+		List<UserApplication> userList = faculty.getApplicants();
+		userList.add(userApplication);
 		faculty.setApplicants(userList);
 		facultyService.save(faculty);
 
-		List<Faculty> facultyList = user.get().getApplications();
-		facultyList.add(faculty);
+		
+		List<UserApplication> facultyList = user.get().getApplications();
+		facultyList.add(userApplication);
 		user.get().setApplications(facultyList);
-         
-         userService.updateAll(UserDTO.setStatus(faculty, user.get()));
+		userApplicationService.saveAll(UserDTO.setStatus(faculty, user.get(), userApplication));
 		
 		return new ModelAndView("redirect:/faculty/" + id.toString());
 	}

@@ -114,3 +114,7 @@ footer {
     justify-content: center;
     flex-wrap: nowrap;
 }
+.tableStyles{
+	width: 65%;
+	margin: 0 auto;
+}

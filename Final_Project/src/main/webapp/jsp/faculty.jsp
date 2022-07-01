@@ -69,6 +69,7 @@
     
   <h3 class="textReminder">Applicants</h3>
   
+  <div class="tableStyles">
   <table class="table">	
   				<thead>
 						<tr>
@@ -81,10 +82,10 @@
 					<c:if test="${not empty applicants}">
 						<c:forEach items="${applicants}" var="applicant">										
 	                          <tr>
-							<td>${applicant.firstName} ${applicant.lastName}</td>		
-							<td>${applicant.averageScore}</td>
+							<td>${applicant.user.firstName} ${applicant.user.lastName}</td>		
+							<td>${applicant.user.averageScore}</td>
 										
-<c:choose>
+ <c:choose>
     <c:when test="${applicant.status == 'Accepted'}"> 
          <td class="row-green">${applicant.status}</td>
     </c:when>
@@ -97,7 +98,7 @@
 						</c:if> 
 					</tbody>
 				</table>
-  
+  </div>
 
 
 <script src="/js/faculty.js"></script>

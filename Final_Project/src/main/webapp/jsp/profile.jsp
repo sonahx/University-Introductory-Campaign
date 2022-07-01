@@ -278,8 +278,8 @@
 						<c:forEach items="${applications}" var="application">
 			
 							<tr>
-							<td>${application.name}</td>		
-							<td>${application.universityName}</td>
+							<td>${application.faculty.name}</td>		
+							<td>${application.faculty.universityName}</td>
 					<tr>
 				</c:forEach>
 						</c:if> 

@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,15 +26,14 @@ public class Faculty {
 	private String description;
 	private Integer studentQuantity;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "faculty_user", joinColumns = @JoinColumn(name = "faculty_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-	public List<User> applicants = new ArrayList<User>();
+	@OneToMany(mappedBy="faculty")
+	public List<UserApplication> applicants = new ArrayList<UserApplication>();
 
 	public Faculty() {
 	}
 
 	public Faculty(Integer id, String name, String universityName, Integer studentsToAccept, String description,
-			Integer studentQuantity, List<User> applicants) {
+			Integer studentQuantity, List<UserApplication> applicants) {
 		this.id = id;
 		this.name = name;
 		this.universityName = universityName;
@@ -48,7 +44,7 @@ public class Faculty {
 	}
 
 	public Faculty(String name, String universityName, Integer studentsToAccept, String description,
-			Integer studentQuantity, List<User> applicants) {
+			Integer studentQuantity, List<UserApplication> applicants) {
 		this.name = name;
 		this.universityName = universityName;
 		this.studentsToAccept = studentsToAccept;
@@ -81,11 +77,11 @@ public class Faculty {
 		this.description = description;
 	}
 
-	public List<User> getApplicants() {
+	public List<UserApplication> getApplicants() {
 		return applicants;
 	}
 
-	public void setApplicants(List<User> applicants) {
+	public void setApplicants(List<UserApplication> applicants) {
 		this.applicants = applicants;
 	}
 

@@ -31,7 +31,7 @@
   <form:input name="studentsToAccept" path="studentsToAccept" type="number" class="feedback-input" placeholder="Number of accepted student spots" />
   <form:textarea name="text" path="description" class="feedback-input" placeholder="Description"></form:textarea>
    <form:input name="studentQuantity" path="studentQuantity" type="number" class="feedback-input" placeholder="Active students number" />
-  <input type="submit" value="Submit"/>
+  <input class="btn-primary" type="submit" value="Submit"/>
   
   <input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />

@@ -35,11 +35,9 @@ public class User {
 	private String encodedImage;
 
 	private UserRole role;
-	
-	private String status;
 
-	@ManyToMany(mappedBy = "applicants")
-	private List<Faculty> applications = new ArrayList<Faculty>();
+	@ManyToMany(mappedBy = "user")
+	private List<UserApplication> applications = new ArrayList<UserApplication>();
 
 	@OneToMany(mappedBy = "user")
 	private List<Subject> subjects = new ArrayList<Subject>();
@@ -58,7 +56,7 @@ public class User {
 	};
 
 	public User(Integer id, String email, String firstName, String lastName, String password, UserRole role,
-			List<Faculty> applications) {
+			List<UserApplication> applications) {
 		this.id = id;
 		this.email = email;
 		this.firstName = firstName;
@@ -134,11 +132,11 @@ public class User {
 		this.role = role;
 	}
 
-	public List<Faculty> getApplications() {
+	public List<UserApplication> getApplications() {
 		return applications;
 	}
 
-	public void setApplications(List<Faculty> applications) {
+	public void setApplications(List<UserApplication> applications) {
 		this.applications = applications;
 	}
 
@@ -182,18 +180,10 @@ public class User {
 		this.encodedImage = encodedImage;
 	}
 	
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(averageScore, avgSchoolScore, email, encodedImage, firstName, id, lastName, password,
-				passwordConfirm, role, status);
+				passwordConfirm, role);
 	}
 
 	@Override
@@ -209,8 +199,7 @@ public class User {
 				&& Objects.equals(email, other.email) && Objects.equals(encodedImage, other.encodedImage)
 				&& Objects.equals(firstName, other.firstName) && Objects.equals(id, other.id)
 				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
-				&& Objects.equals(passwordConfirm, other.passwordConfirm) && role == other.role
-				&& status == other.status;
+				&& Objects.equals(passwordConfirm, other.passwordConfirm) && role == other.role;
 	}
 
 	@Override

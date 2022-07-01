@@ -11,6 +11,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<link rel="stylesheet" href="/css/register-login.css">
 </head>
 <body style="background-color: #eee;">
 
@@ -21,14 +23,14 @@
 
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <span>${message}</span>
-            <input name="email" type="text" class="form-control" placeholder="Email"
+            <input name="email" type="text" class="form-control login-input" placeholder="Email"
                    autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <input name="password" type="password" class="form-control login-input" placeholder="Password"/>
             <span>${error}</span>
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+            <a class="accountText" href="${contextPath}/registration">Create an account</a>
         </div>
 
     </form>
