@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -48,14 +49,23 @@
   <c:set var="averageScore" value="${user.averageScore}" />
 <c:choose>
     <c:when test="${averageScore ne null}"> 
-        <td><a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}/apply/${pageContext.request.userPrincipal.name}">Apply</a></td>
+        <td>
+        <security:authorize access="hasRole('ROLE_USER')">
+        <a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}/apply/${pageContext.request.userPrincipal.name}">Apply</a>
+        </security:authorize>
+        </td>
     </c:when>
     <c:otherwise>
            
 <!-- Button trigger modal -->
-<td><button type="button" class="btn btn-primary apply-button" data-toggle="modal" data-target="#exampleModal">
-  Apply
-</button> </td>      
+
+<td>
+ <security:authorize access="hasRole('ROLE_USER')">
+<button type="button" class="btn btn-primary apply-button" data-toggle="modal" data-target="#exampleModal">
+  Apply </button> 
+</security:authorize>  
+</td>  
+  
     </c:otherwise> 
 </c:choose>	
 					<tr>

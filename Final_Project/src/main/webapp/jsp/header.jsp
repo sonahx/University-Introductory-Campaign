@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -33,17 +33,19 @@
 						<ul class="nav navbar-nav header-items">
 							<li class="nav-item" role="presentation"><a class="nav-link"
 								href="${contextPath}/home">Home</a></li>
-								<li class="nav-item" role="presentation"><a class="nav-link"
-
-							href="${contextPath}/profile/${pageContext.request.userPrincipal.name}">Profile</a></li>
+								<li class="nav-item" role="presentation">
+								<security:authorize access="hasRole('ROLE_USER')">	
+								<a class="nav-link" href="${contextPath}/profile/${pageContext.request.userPrincipal.name}">Profile</a>
+							</security:authorize>
+							</li>
 							<li class="dropdown"><a
 								class="dropdown-toggle nav-link dropdown-toggle"
 								data-toggle="dropdown" aria-expanded="false" href="#">Menu
 							</a>
 								<div class="dropdown-menu" role="menu">
+								<security:authorize access="hasRole('ROLE_ADMINISTRATOR')">		
 									<a class="dropdown-item" role="presentation" href="${contextPath}/createFaculty">Create faculty</a>
-<!-- 										<a class="dropdown-item" role="presentation" href="#">Second Item</a>
-										<a class="dropdown-item" role="presentation" href="#">Third Item</a> -->
+									</security:authorize>
 								</div></li>
 
 

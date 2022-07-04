@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -113,8 +114,9 @@
             </div>
             
                         <!--START CERTIFICATE MODAL  --> 
-             
+   <security:authorize access="hasRole('ROLE_USER')">	         
 <button type="button" class="btn btn-primary certificateScoreButton" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add certificate score</button>
+</security:authorize>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -188,11 +190,11 @@
        
      <c:choose>
     <c:when test="${user.avgSchoolScore == null}"> 
-         
+         <security:authorize access="hasRole('ROLE_USER')">	 
          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4">
   Add exam scores
 </button>
-
+</security:authorize>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -212,8 +214,10 @@
 </div> 
          
     </c:when>
-    <c:otherwise>		
+    <c:otherwise>
+    <security:authorize access="hasRole('ROLE_USER')">		
     	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" data-whatever="@mdo">Add exam score</button>
+    	</security:authorize>
 <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

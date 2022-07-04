@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -38,9 +39,12 @@
     <c:otherwise>
            
 <!-- Button trigger modal -->
+<security:authorize access="hasRole('ROLE_USER')">
 <button type="button" class="btn btn-primary btn-lg apply-button" data-toggle="modal" data-target="#exampleModal">
   Apply
 </button>
+</security:authorize>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
