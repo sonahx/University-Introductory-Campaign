@@ -1,0 +1,32 @@
+2022-07-04 21:24:37 [main]  INFO ua.lviv.lgs.Application - Starting Application using Java 17.0.1 on WWW with PID 13300 (C:\Users\user\git\Final_Project\Final_Project\target\classes started by user in C:\Users\user\git\Final_Project\Final_Project)
+2022-07-04 21:24:37 [main]  INFO ua.lviv.lgs.Application - No active profile set, falling back to 1 default profile: "default"
+2022-07-04 21:24:37 [main]  INFO o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-04 21:24:37 [main]  INFO o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 4 JPA repository interfaces.
+2022-07-04 21:24:38 [main]  INFO o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2022-07-04 21:24:38 [main]  INFO o.a.catalina.core.StandardService - Starting service [Tomcat]
+2022-07-04 21:24:38 [main]  INFO o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.63]
+2022-07-04 21:24:38 [main]  INFO org.apache.jasper.servlet.TldScanner - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2022-07-04 21:24:38 [main]  INFO o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2022-07-04 21:24:38 [main]  INFO o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1112 ms
+2022-07-04 21:24:38 [main]  INFO o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-04 21:24:38 [main]  INFO org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.9.Final
+2022-07-04 21:24:38 [main]  INFO o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-04 21:24:38 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2022-07-04 21:24:39 [main]  INFO com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2022-07-04 21:24:39 [main]  INFO org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2022-07-04 21:24:39 [main]  INFO o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-04 21:24:39 [main]  INFO o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-04 21:24:40 [main]  INFO o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@37816ea6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7a74672, org.springframework.security.web.context.SecurityContextPersistenceFilter@7b364f47, org.springframework.security.web.header.HeaderWriterFilter@528c4353, org.springframework.security.web.csrf.CsrfFilter@4724b2c1, org.springframework.security.web.authentication.logout.LogoutFilter@3d6745ed, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@16602333, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3d42b756, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c93e69, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@35b79b1f, org.springframework.security.web.session.SessionManagementFilter@7fb02606, org.springframework.security.web.access.ExceptionTranslationFilter@6af29394, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@31e9d94f]
+2022-07-04 21:24:40 [main]  WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-04 21:24:40 [main]  INFO o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-04 21:24:40 [main]  INFO ua.lviv.lgs.Application - Started Application in 3.331 seconds (JVM running for 3.595)
+2022-07-04 21:24:54 [http-nio-8080-exec-1]  INFO o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-04 21:24:55 [http-nio-8080-exec-5]  INFO ua.lviv.lgs.service.FacultyService - get all faculties
+2022-07-04 21:24:55 [http-nio-8080-exec-5]  INFO ua.lviv.lgs.service.UserService - get user by email: 3
+2022-07-04 21:25:17 [http-nio-8080-exec-8]  INFO ua.lviv.lgs.service.FacultyService - get all faculties
+2022-07-04 21:25:17 [http-nio-8080-exec-8]  INFO ua.lviv.lgs.service.UserService - get user by email: 3
+2022-07-04 21:25:17 [http-nio-8080-exec-1]  INFO ua.lviv.lgs.service.FacultyService - get all faculties
+2022-07-04 21:25:17 [http-nio-8080-exec-1]  INFO ua.lviv.lgs.service.UserService - get user by email: 3
+2022-07-04 21:25:18 [http-nio-8080-exec-4]  INFO ua.lviv.lgs.service.UserService - get user by email: 3
+2022-07-04 21:25:19 [http-nio-8080-exec-6]  INFO ua.lviv.lgs.service.FacultyService - get all faculties
+2022-07-04 21:25:19 [http-nio-8080-exec-6]  INFO ua.lviv.lgs.service.UserService - get user by email: 3
