@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
@@ -13,7 +12,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>home</title>
+<title><spring:message code='home.header'/></title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/home.css"> 
@@ -25,10 +24,10 @@
 <table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Faculty name</th>
-							<th>University</th>
-							<th>Students</th>
-							<th>Student spots</th>
+							<th><spring:message code='home.facultyName'/></th>
+							<th><spring:message code='home.university'/></th>
+							<th><spring:message code='home.students'/></th>
+							<th><spring:message code='home.studentSpots'/></th>
 							<th></th>
 							<th></th>
 
@@ -43,7 +42,7 @@
 							<td>${currentFaculty.studentQuantity}</td>
 							<td>${currentFaculty.studentsToAccept}</td>
 							
-					<td><a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}">More</a></td>
+					<td><a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}"><spring:message code='home.more'/></a></td>
 					
 					
   <c:set var="averageScore" value="${user.averageScore}" />
@@ -51,7 +50,7 @@
     <c:when test="${averageScore ne null}"> 
         <td>
         <security:authorize access="hasRole('ROLE_USER')">
-        <a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}/apply/${pageContext.request.userPrincipal.name}">Apply</a>
+        <a class="btn btn-primary apply-button" href="${contextPath}/faculty/${currentFaculty.id}/apply/${pageContext.request.userPrincipal.name}"><spring:message code='home.apply'/></a>
         </security:authorize>
         </td>
     </c:when>
@@ -62,7 +61,7 @@
 <td>
  <security:authorize access="hasRole('ROLE_USER')">
 <button type="button" class="btn btn-primary apply-button" data-toggle="modal" data-target="#exampleModal">
-  Apply </button> 
+  <spring:message code='home.apply'/> </button> 
 </security:authorize>  
 </td>  
   
@@ -83,11 +82,11 @@
         <h5 class="modal-title" id="exampleModalLabel"></h5>
       </div>
       <div class="modal-body">
-        You have to add your school certificate and exam scores to your profile first!
+        <spring:message code='home.modal.text'/>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a type="button" href="${contextPath}/profile/${pageContext.request.userPrincipal.name}" class="btn btn-primary">Navigate to profile</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><spring:message code='home.modal.close'/></button>
+        <a type="button" href="${contextPath}/profile/${pageContext.request.userPrincipal.name}" class="btn btn-primary"><spring:message code='home.modal.navigate'/></a>
       </div>
     </div>
   </div>

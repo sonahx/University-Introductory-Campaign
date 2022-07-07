@@ -1,0 +1,17 @@
+.localesWrapper{
+	display:flex;
+	margin: 0 auto;
+}
+
+.text-center{
+	display:flex;
+	flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.copyright{
+	font-size: 20px;
+}
+.fieldset{
+	border: 0px;
+}

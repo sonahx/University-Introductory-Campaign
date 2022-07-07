@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Create faculty</title>
+<title><spring:message code='facultyForm.header'/></title>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -26,11 +26,11 @@
 
 <form:form method="POST" action="${contextPath}/addFaculty" modelAttribute="faculty">  
     
-  <form:input name="name" path="name" type="text" class="feedback-input" placeholder="Faculty Name" />   
-  <form:input name="universityName" path="universityName" type="text" class="feedback-input" placeholder="University Name" />
-  <form:input name="studentsToAccept" path="studentsToAccept" type="number" class="feedback-input" placeholder="Number of accepted student spots" />
+  <form:input name="name" path="name" type="text" class="feedback-input" placeholder="Faculty name" />   
+  <form:input name="universityName" path="universityName" type="text" class="feedback-input" placeholder="University name" />
+  <form:input name="studentsToAccept" path="studentsToAccept" type="number" class="feedback-input" placeholder="Amount of students to accept" />
   <form:textarea name="text" path="description" class="feedback-input" placeholder="Description"></form:textarea>
-   <form:input name="studentQuantity" path="studentQuantity" type="number" class="feedback-input" placeholder="Active students number" />
+   <form:input name="studentQuantity" path="studentQuantity" type="number" class="feedback-input" placeholder="Student quantity" />
   <input class="btn-primary" type="submit" value="Submit"/>
   
   <input type="hidden" name="${_csrf.parameterName}"
