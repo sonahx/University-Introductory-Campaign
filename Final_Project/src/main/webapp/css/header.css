@@ -180,3 +180,8 @@ margin-left: 10px;
 .logout-button:hover{
  color: white;
  }
+ 
+.localesWrapper{
+	position: relative;
+	right:-150px;
+}

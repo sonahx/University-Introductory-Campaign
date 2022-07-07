@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
@@ -34,14 +34,14 @@
   <c:set var="schoolScore" value="${user.avgSchoolScore}" />
 <c:choose>
     <c:when test="${averageScore ne null}"> 
-         <a href="${contextPath}/faculty/${faculty.id}/apply/${pageContext.request.userPrincipal.name}" class="btn btn-primary btn-lg apply-button">Apply</a>             
+         <a href="${contextPath}/faculty/${faculty.id}/apply/${pageContext.request.userPrincipal.name}" class="btn btn-primary btn-lg apply-button"><spring:message code='faculty.apply'/></a>             
     </c:when>
     <c:otherwise>
            
 <!-- Button trigger modal -->
 <security:authorize access="hasRole('ROLE_USER')">
 <button type="button" class="btn btn-primary btn-lg apply-button" data-toggle="modal" data-target="#exampleModal">
-  Apply
+  <spring:message code='faculty.apply'/>
 </button>
 </security:authorize>
 
@@ -54,11 +54,11 @@
         <h5 class="modal-title" id="exampleModalLabel"></h5>
       </div>
       <div class="modal-body">
-        You have to add your school certificate and exam scores to your profile first!
+       <spring:message code='home.modal.text'/>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a type="button" href="${contextPath}/profile/${pageContext.request.userPrincipal.name}" class="btn btn-primary">Navigate to profile</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><spring:message code='Close home.modal.close'/></button>
+        <a type="button" href="${contextPath}/profile/${pageContext.request.userPrincipal.name}" class="btn btn-primary"><spring:message code='home.modal.navigate'/></a>
       </div>
     </div>
   </div>
@@ -68,18 +68,18 @@
 </c:choose>
     </div>
     
-    <h3 class="textReminder">Only ${faculty.studentsToAccept} student(s) with the highest average score will be accepted!</h3>
+    <h3 class="textReminder"><spring:message code='faculty.message-p1'/> ${faculty.studentsToAccept} <spring:message code='faculty.message-p2'/></h3>
     
     
-  <h3 class="textReminder">Applicants</h3>
+  <h3 class="textReminder"><spring:message code='faculty.applicants'/></h3>
   
   <div class="tableStyles">
   <table class="table">	
   				<thead>
 						<tr>
-							<th>Applicant name</th>
-							<th>Score</th>
-							<th>Status</th>
+							<th><spring:message code='faculty.applicantName'/></th>
+							<th><spring:message code='faculty.score'/></th>
+							<th><spring:message code='faculty.status'/></th>
 						</tr>
 					</thead>
 					<tbody>
